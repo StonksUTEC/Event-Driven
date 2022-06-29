@@ -1,8 +1,11 @@
 from pymongo import MongoClient
 import json
 def insert_data(str_data):
-    client = MongoClient("mongodb://admin:password@localhost:27017/")
-    db = client["mydabase"]
+    client = MongoClient('localhost',27017)
+    db = client.login
+
+    #client = MongoClient("mongodb://admin:admin@localhost:27017/")
+    #db = client["mydabase"]
     collection = db.my_gfg_collection
      
     # emp_rec1 = {
@@ -18,7 +21,7 @@ def insert_data(str_data):
 
      
     # Insert Data
-    rec_id = collection.insert_one(json.load(str_data))
+    rec_id = collection.insert_one(json.loads(str_data))
      
     print("Data inserted with record ids",rec_id)
      

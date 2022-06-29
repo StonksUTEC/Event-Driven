@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import pika, sys, os, json
-import consumer
+import generic_consumer
 from Gmail.gmail import send_email
 
 def callback(ch, method, properties, body):
@@ -11,5 +11,5 @@ def callback(ch, method, properties, body):
 
 
 if __name__ == '__main__':
-    cons = consumer.GenericConsumer("hello", callback)
+    cons = generic_consumer.GenericConsumer("hello", callback)
     cons.run()

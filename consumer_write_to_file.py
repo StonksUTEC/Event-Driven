@@ -3,9 +3,11 @@ from generic_consumer import GenericConsumer
 
 
 
-import touch
+from pathlib import Path
+#import touch
 
-touch.touch('data.dat')
+#touch.touch('data.dat')
+Path('data.dat').touch(exist_ok=True);
 
 def callback(ch,method,properties,body):
     file = open('data.dat',mode="a+")
