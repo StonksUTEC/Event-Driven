@@ -1,13 +1,22 @@
 #!/usr/bin/env python
 import pika
+from sys import stdin
 
 connection = pika.BlockingConnection(
     pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-channel.queue_declare(queue='hello')
+channel.exchange_declare(exchange='hello', exchange_type='fanout')
 
-channel.basic_publish(exchange='', routing_key='hello', body='Hola Curso UTEC!')
-channel.basic_publish(exchange='', routing_key='email', body='Esto es un email!')
-print(" [x] Mensaje Enviado ! 'Hola Curso UTEC!'")
+
+
+body = "" 
+
+for line in stdin:
+    body += line
+
+print(body)
+   
+
+channel.basic_publish(exchange='hello', routing_key='', body=body)
 connection.close()
